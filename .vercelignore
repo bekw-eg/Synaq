@@ -1,0 +1,11 @@
+.env*
+AGENTS.md
+node_modules/
+.next*/
+.vercel/
+tmp/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+math-service/

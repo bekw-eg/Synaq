@@ -2,6 +2,9 @@
   "name": "synaq",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -42,7 +45,7 @@
     "test:kazakh:ai": "tsx scripts/test_kazakh_ai.ts",
     "offline:build": "tsx scripts/build_offline.ts",
     "brand:build": "node scripts/build_brand_assets.mjs",
-    "prebuild": "npm run brand:build",
+    "prebuild": "npm run db:generate && npm run brand:build",
     "predev": "npm run brand:build",
     "test:offline:unit": "tsx scripts/test_offline_unit.ts",
     "test:offline:http": "npm run test:choices:http",

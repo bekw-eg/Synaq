@@ -1,8 +1,11 @@
 {
-  "name": "Synaq — Математика",
+  "id": "/",
+  "name": "Synaq — Пробник по математике",
   "short_name": "Synaq",
-  "description": "Персональный тренажёр математики для подготовки к ЕНТ ТиПО",
+  "description": "Пробный тест по математике ЕНТ ТиПО: задания, разбор и сохранённые результаты",
   "start_url": "/",
+  "scope": "/",
+  "lang": "ru",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",

@@ -22,5 +22,23 @@ export function ExamAccount() {
       <Button variant="outline" disabled={busy} onClick={logout}>{kk ? "Шығу" : "Выйти"}</Button>
       {error && <p role="alert">{error}</p>}
     </section>
+    <section aria-labelledby="phone-launch-title" className="space-y-3 rounded-lg border p-4 sm:p-6">
+      <h2 id="phone-launch-title" className="section-title">{kk ? "Телефонда жылдам ашу" : "Быстрый запуск на телефоне"}</h2>
+      <p className="text-sm text-muted-foreground">{kk
+        ? "Synaq белгішесін басты экранға қосыңыз. Сынақтар мен нәтижелер үшін интернет қажет."
+        : "Добавьте значок Synaq на главный экран. Для пробников и результатов нужен интернет."}</p>
+      <details className="text-sm">
+        <summary className="cursor-pointer font-medium">Android · Chrome</summary>
+        <p className="py-2">{kk
+          ? "Chrome мәзірін (⋮) ашыңыз → «Басты экранға қосу» → «Орнату». Егер орнату ұсынылмаса, таңбаша қосуға болады."
+          : "Откройте меню Chrome (⋮) → «Добавить на главный экран» → «Установить». Если установка не предлагается, можно создать ярлык."}</p>
+      </details>
+      <details className="text-sm">
+        <summary className="cursor-pointer font-medium">iPhone · Safari</summary>
+        <p className="py-2">{kk
+          ? "Сайтты Safari арқылы ашыңыз → «Бөлісу» → «Басты экранға қосу» → «Қосу»."
+          : "Откройте сайт в Safari → «Поделиться» → На экран «Домой» → «Добавить»."}</p>
+      </details>
+    </section>
   </div></>;
 }
