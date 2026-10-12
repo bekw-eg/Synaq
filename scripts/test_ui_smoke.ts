@@ -87,7 +87,11 @@ async function main() {
     await expect(page).toHaveURL(`${base}/login`);
     await page.locator("#page-login-email").fill(email);
     await page.locator("#page-login-password").fill(password);
+    await expect(page.locator("#page-login-email")).toHaveValue(email);
+    await expect(page.locator("#page-login-password")).toHaveValue(password);
+    const loggedIn = page.waitForResponse(r => r.url().endsWith("/api/auth/login") && r.request().method() === "POST");
     await page.getByRole("button", { name: "Войти в кабинет", exact: true }).click();
+    assert.equal((await loggedIn).status(), 200);
     await expect(page).toHaveURL(base + "/");
     await page.getByRole("link", { name: "Продолжить пробник", exact: true }).click();
     await expect(page).toHaveURL(`${base}/exam/${id}`);
@@ -150,7 +154,7 @@ main().catch(error => { console.error(error); process.exitCode = 1; }).finally(a
       await tx.userTopicProgress.deleteMany({ where: { userId } });
       await tx.dailyGoal.deleteMany({ where: { userId } });
       await tx.user.delete({ where: { id: userId, email } });
-    });
+    }, { maxWait: 10000, timeout: 30000 });
   }
   await prisma.$disconnect();
 });

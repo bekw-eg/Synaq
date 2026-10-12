@@ -3,7 +3,7 @@ import { uiText, errorText } from "@/lib/i18n/messages";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -24,6 +24,8 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [ready, setReady] = useState(false);
+  useEffect(() => { setReady(true); }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -110,8 +112,8 @@ export default function LoginPage() {
               className="w-full"
             >
               <TabsList className="grid grid-cols-2 w-full mb-4">
-                <TabsTrigger value="login">{uiText("Вход", locale)}</TabsTrigger>
-                <TabsTrigger value="register">{uiText("Регистрация", locale)}</TabsTrigger>
+                <TabsTrigger value="login" disabled={!ready || loading}>{uiText("Вход", locale)}</TabsTrigger>
+                <TabsTrigger value="register" disabled={!ready || loading}>{uiText("Регистрация", locale)}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="login">
@@ -120,6 +122,7 @@ export default function LoginPage() {
                     <Label htmlFor="page-login-email">Email</Label>
                     <Input
                       id="page-login-email" autoComplete="email"
+                      disabled={!ready || loading}
                       type="email"
                       required
                       placeholder="student@example.com"
@@ -131,6 +134,7 @@ export default function LoginPage() {
                     <Label htmlFor="page-login-password">{uiText("Пароль", locale)}</Label>
                     <Input
                       id="page-login-password" autoComplete="current-password"
+                      disabled={!ready || loading}
                       type="password"
                       required
                       placeholder="••••••••"
@@ -139,7 +143,7 @@ export default function LoginPage() {
                     />
                   </div>
 
-                  <Button type="submit" className="w-full" disabled={loading}>
+                  <Button type="submit" className="w-full" disabled={!ready || loading}>
                     {loading ? uiText("Вход...", locale) : uiText("Войти в кабинет", locale)}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -152,6 +156,7 @@ export default function LoginPage() {
                     <Label htmlFor="page-reg-name">{uiText("Имя и фамилия", locale)}</Label>
                     <Input
                       id="page-reg-name" autoComplete="name"
+                      disabled={!ready || loading}
                       required
                       placeholder={uiText("Арман Ахметов", locale)}
                       value={name}
@@ -162,6 +167,7 @@ export default function LoginPage() {
                     <Label htmlFor="page-reg-email">Email</Label>
                     <Input
                       id="page-reg-email" autoComplete="email"
+                      disabled={!ready || loading}
                       type="email"
                       required
                       placeholder="arman@ent.kz"
@@ -173,6 +179,7 @@ export default function LoginPage() {
                     <Label htmlFor="page-reg-password">{uiText("Пароль", locale)}</Label>
                     <Input
                       id="page-reg-password" autoComplete="new-password"
+                      disabled={!ready || loading}
                       type="password"
                       required
                       minLength={4}
@@ -182,7 +189,7 @@ export default function LoginPage() {
                     />
                   </div>
 
-                  <Button type="submit" className="w-full" disabled={loading}>
+                  <Button type="submit" className="w-full" disabled={!ready || loading}>
                     {loading ? uiText("Создание...", locale) : uiText("Зарегистрироваться", locale)}
                     <ShieldCheck className="w-4 h-4 ml-2" />
                   </Button>
@@ -191,7 +198,7 @@ export default function LoginPage() {
             </Tabs>
             {demoEnabled && (
               <div className="border-t pt-4 space-y-2">
-                <Button variant="outline" className="w-full" disabled={loading} onClick={handleDemoLogin}>
+                <Button variant="outline" className="w-full" disabled={!ready || loading} onClick={handleDemoLogin}>
                   {uiText(" Попробовать демоверсию ", locale)}</Button>
                 <p className="text-xs text-muted-foreground text-center">
                   {uiText(" В демоверсии используются общие учебные данные. Для сохранения личных результатов создайте аккаунт. ", locale)}</p>
