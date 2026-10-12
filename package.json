@@ -36,6 +36,7 @@
     "db:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
+    "db:cloud:init": "tsx scripts/seed_cloud_exam_bank.ts",
     "db:studio": "prisma studio",
     "db:reset": "prisma migrate reset --force && tsx prisma/seed.ts",
     "db:kazakh": "tsx scripts/seed_kazakh_content.ts",
